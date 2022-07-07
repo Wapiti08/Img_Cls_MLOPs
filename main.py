@@ -33,23 +33,23 @@ class Output(BaseModel):
     label: str
     prediction: int
 
-@app.route('/info', method=['GET'])
+@app.get('/info')
 async def model_info():
-    model_info = {}
-    model_info['version'] = version
-    model_info['model_name'] = model_name
+    return {
+        "name": model_name,
+        "version": version
+    }
 
-    return model_info
 
 
-@app.route('/health', method=['GET'])
+@app.get('/health')
 async def service_health():
     '''
     
     ''' 
     return 'ok'
 
-@app.route('/predict', method=['POST'])
+@app.post('/predict', response_model=Output)
 async def predict(input):
     response = get_model_response(input)
 

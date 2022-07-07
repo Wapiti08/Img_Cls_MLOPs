@@ -1,6 +1,6 @@
-from flask import Flask
+from fastapi import FastAPI
 import joblib
 
-app = Flask(__name__)
+app = FastAPI()
 
 model = joblib.load('./model/model_binary.dat.gz')
